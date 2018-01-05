@@ -32,3 +32,6 @@ docs/
 build/
 dist/
 cache/
+
+# compiled server code
+lib/
