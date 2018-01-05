@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <can-import from="autorender-bug/styles.less!" />
+    <can-import from="autorender-bug/server" export-as="viewModel" />
+
+    <h1>howdy from the server</h1>
+  </body>
+</html>

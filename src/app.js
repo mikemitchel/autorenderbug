@@ -1,19 +1,40 @@
-import Map from "can/map/";
-import route from "can/route/";
-import 'can/map/define/';
-import 'can/route/pushstate/';
+'use strict';
 
-const AppViewModel = Map.extend({
-  define: {
-    message: {
-      value: 'Hello World!',
-      serialize: false
-    },
-    title: {
-      value: 'autorender-bug',
-      serialize: false
-    }
-  }
+const path = require('path');
+const feathers = require('feathers');
+const assemble = require('./assemble');
+
+const app = feathers();
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-export default AppViewModel;
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function (err, req, res) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
+module.exports = app;
